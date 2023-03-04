@@ -27,9 +27,9 @@ app.use(cors())
 app.use(xss())
 //extra packages
 
-// app.get('/', (req, res) => {
-//   res.send('job api')
-// })
+app.get('/', (req, res) => {
+  res.send('job api')
+})
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/jobs', authenticationMiddleware, jobRouter)
 
