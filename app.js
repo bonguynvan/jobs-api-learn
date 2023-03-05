@@ -8,6 +8,11 @@ const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 const helmet = require('helmet')
 const xss = require('xss-clean')
+//swagger
+const YAML = require('yamljs')
+const SwaggerUI = require('swagger-ui-express')
+const swaggerDocument = YAML.load('./jobs-api-document.yml')
+
 const app = express()
 const authenticationMiddleware = require('./middleware/authentication')
 // error handler
@@ -28,8 +33,9 @@ app.use(xss())
 //extra packages
 
 app.get('/', (req, res) => {
-  res.send('job api')
+  res.send('<h1>Jobs api</h1><a href="/api-docs">Documentation</a>')
 })
+app.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDocument))
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/jobs', authenticationMiddleware, jobRouter)
 
