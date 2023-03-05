@@ -104,7 +104,7 @@ paths:
       deprecated: false
       security:
       - bearer: []
-  /jobs/{id}:
+  /jobs/:id:
     get:
       tags:
       - Jobs
